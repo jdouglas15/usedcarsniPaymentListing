@@ -1,4 +1,4 @@
 <?php
 
-require_once 'parseform.php';
+require_once 'receiveData.php';
 

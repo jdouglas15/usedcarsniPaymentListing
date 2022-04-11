@@ -3,6 +3,7 @@ use App\Car;
 
 
 require_once __DIR__ . '/vendor/autoload.php';
+$dateNow = date("Y-m-d");
 
 // Get the JSON contents
 $json = file_get_contents('php://input');
@@ -11,12 +12,12 @@ $json = file_get_contents('php://input');
 $data = json_decode($json);
 
 if(isset($data->customerID)){
-    $customerID = $data->customerID;
+    $customerID = is_int($data->customerID) ? $data->customerID : 0; //set to 0 if not int
     $carMake = $data->carMake;
-    $carValue = $data->carValue;
-    $carLastListed = empty($data->carLastListed) ? "No Date Recieved" : $data->carLastListed;
-    $requestId = $data->requestId;
-    $vehicleId = $data->vehicleId;
+    $carValue = $data->carValue; 
+    $carLastListed = empty($data->carLastListed) || $data->carLastListed > $dateNow ? "No Appropriate Date Recieved" : $data->carLastListed; //checks if date recieved is, a) a date b) less than today's date
+    $requestId = is_int($data->requestId) ? $data->requestId : 0; //set to 0 if not int
+    $vehicleId = is_int($data->vehicleId) ? $data->vehicleId : 0; //set to 0 if not int
     
     $car = new Car($customerID, $requestId, $vehicleId, $carMake, $carValue, $carLastListed);
 

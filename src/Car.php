@@ -114,7 +114,6 @@ class Car
      */
     public function listingPriceDateCheck(): string
     {
-        
         if (strtotime($this->getCarLastListed()) > strtotime('-30 days')) {
             return $this->listingPriceCheck = "This car has been listed in the last 30 days. Discount applied";
         } else {
