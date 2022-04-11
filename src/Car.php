@@ -12,7 +12,7 @@ class Car
      * The ID of the customer
      * @var int $customerID
      */
-    private $customerID, $requestId;
+    private $customerID, $requestId, $vehicleId;
     private $carMake, $carValue, $carLastListed;
     
     /**Create a new Car object 
@@ -21,10 +21,11 @@ class Car
      * @param $carValue, the value of the car
      * @param $carLastListed, last time the car was listed
      */
-    public function __construct(int $customerID, int $requestId, string $carMake, float $carValue, string $carLastListed)
+    public function __construct(int $customerID, int $requestId, int $vehicleId, string $carMake, float $carValue, string $carLastListed)
     {
         $this->customerID = $customerID;
         $this->requestId = $requestId;
+        $this->vehicleId = $vehicleId;
         $this->carMake = $carMake;
         $this->carValue = $carValue;
         $this->carLastListed = $carLastListed;
@@ -47,6 +48,15 @@ class Car
     public function getRequestId(): int
     {
         return $this->requestId;
+    }
+
+    /**
+     * get the id of the car 
+     * @return int
+     */
+    public function getVehicleId(): int
+    {
+        return $this->vehicleId;
     }
 
     /**
@@ -79,9 +89,10 @@ class Car
     
     /**
      * set and return listing price
-     * @return float
-     */
-    public function listingPrice(): float
+     * @return string 
+     * transfer numeric values in JSON as strings is to eliminate any loss of precision or ambiguity in transfer.
+     */ 
+    public function listingPrice(): string
     {
         if ($this->getCarValue() < 1000) {
             return $this->listingPrice = "0";
@@ -113,9 +124,9 @@ class Car
 
     /**
      * set and return listing price if listing is < 30 days old
-     * @return float
+     * @return string
      */
-    public function listingPriceAdjustmentDateCheck(): float
+    public function listingPriceAdjustmentDateCheck(): string
     {
         if (strtotime($this->getCarLastListed()) > strtotime('-30 days')) {
             $this->priceAdjustment = $this->listingPrice - ($this->listingPrice * 0.15);
