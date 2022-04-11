@@ -23,8 +23,8 @@ Example of response
 - Validation on IDs and listing date (needs to be not null and > current date)
 
 
-Known Issues
-
+Other Info
+- I had created a functioning form for posting the car info (form.php), decided not to go with it because it was probably overkill. I left it in so you can see my working
 
 Areas for Improvements
 - Unit testing
