@@ -8,9 +8,9 @@ if(isset($_POST['customerID'])){
     $carMake = $_POST['carMake'];
     $carValue = $_POST['carValue'];
     $carLastListed = $_POST['carLastListed'];
+    $requestId = "0";
     
-    $car = new Car($customerID, $carMake, $carValue, $carLastListed);
-    // $car->setMarks($php, $java, $nodejs, $ruby, $cplusplus);
+    $car = new Car($customerID, $requestId ,$carMake, $carValue, $carLastListed);
 }
 
 
